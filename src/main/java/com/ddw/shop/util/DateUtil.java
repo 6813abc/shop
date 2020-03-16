@@ -21,7 +21,7 @@ public class DateUtil {
     }
     public static String getTodayFlow() {
         Calendar calendar = Calendar.getInstance();
-        return DateFormatUtils.format(calendar.getTime(), Constants.DATEYYYYMMDDHMMSS);
+        return DateFormatUtils.format(calendar.getTime(),Constants.DATEYYYYMMDDHMMSS);
     }
 
     public static String getToDayTime() {

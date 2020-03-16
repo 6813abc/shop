@@ -1,5 +1,4 @@
-package util;
-
+package com.ddw.shop.util;
 
 /**
  * @Description: 常量
