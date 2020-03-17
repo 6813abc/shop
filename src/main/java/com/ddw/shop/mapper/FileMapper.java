@@ -12,5 +12,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Version:
  **/
 public interface FileMapper extends JpaRepository<File, Long> {
-
 }
