@@ -2,6 +2,7 @@ package com.ddw.shop.service;
 
 import com.ddw.shop.config.JwtToken;
 import com.ddw.shop.dto.UserAdd;
+import com.ddw.shop.entity.Address;
 import com.ddw.shop.entity.File;
 import com.ddw.shop.entity.User;
 import com.ddw.shop.exception.BaseResult;
@@ -47,7 +48,10 @@ public class AddressService {
     @Autowired
     private ValidateCodeUtil validateCodeUtil;
 
-    public BaseResult addAddress(String phone ,String address) {
+    public BaseResult addAddress(String phone, String address) {
+        Address address1 = new Address();
+        address1.setAddress(address);
+        addressMapper.save(address1);
         return ResultUtil.success(ResultEnum.OK);
     }
 }
