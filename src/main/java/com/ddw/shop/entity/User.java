@@ -17,10 +17,9 @@ public class User {
     private String password;
     private String name;
     private String sex;
-    private String address;
     private Long imgId;
     /**
-     * 余额
+     * 消费
      **/
     private String money;
 }

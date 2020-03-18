@@ -15,11 +15,5 @@ public class UserAdd {
     private String phone;
     private String password;
     private String name;
-    private String sex;
-    private String address;
     private String baseCode;
-    /**
-     * 余额
-     **/
-    private String money;
 }
