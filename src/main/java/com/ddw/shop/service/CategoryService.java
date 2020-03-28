@@ -24,7 +24,7 @@ import java.util.List;
 public class CategoryService {
 
     @Autowired
-    CategoryMapper categoryMapper;
+    CategoryMapper categoryMapper ;
     @Autowired
     CategoryMybatisMapper categoryMybatisMapper;
     private Integer length = 24;
