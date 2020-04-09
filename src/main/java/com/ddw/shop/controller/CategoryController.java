@@ -1,7 +1,6 @@
 package com.ddw.shop.controller;
 
 import com.ddw.shop.exception.BaseResult;
-import com.ddw.shop.service.AddressService;
 import com.ddw.shop.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

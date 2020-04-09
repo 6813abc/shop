@@ -12,6 +12,7 @@ import javax.persistence.Id;
 @Data
 @Entity
 public class Category {
+
     @Id
     private Long cid;
     private String name;
