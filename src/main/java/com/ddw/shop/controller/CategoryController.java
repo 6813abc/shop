@@ -74,12 +74,14 @@ public class CategoryController {
 
     @GetMapping(value = "/insertGoods")
     public BaseResult insertGoods() {
-        int num = 10;
-        Random random = new Random(1000);
+        int max = 30;
+        int min = 10;
+        Random random = new Random();
         List<CategoryDto> categoryDtos = categoryService.getCategory();
         for (CategoryDto categoryDto : categoryDtos) {
             List<CategoryDto> categoryDtos1 = categoryDto.getCategoryDtos();
             for (CategoryDto categoryDto1 : categoryDtos1) {
+                int num = random.nextInt(max) % (max - min + 1) + min;
                 for (int i = 0; i < num; i++) {
                     Good good = new Good();
                     good.setFlag("1");

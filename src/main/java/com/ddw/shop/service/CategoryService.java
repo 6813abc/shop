@@ -1,12 +1,17 @@
 package com.ddw.shop.service;
 
 import com.ddw.shop.dto.CategoryDto;
+import com.ddw.shop.dto.GoodDto;
+import com.ddw.shop.entity.Good;
 import com.ddw.shop.exception.BaseResult;
 import com.ddw.shop.exception.ResultEnum;
 import com.ddw.shop.exception.ResultUtil;
 import com.ddw.shop.mapper.CategoryMapper;
 import com.ddw.shop.mapper.CategoryMybatisMapper;
+import com.ddw.shop.mapper.GoodMapper;
+import com.ddw.shop.mapper.GoodMybatisMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +34,13 @@ public class CategoryService {
     CategoryMapper categoryMapper;
     @Autowired
     CategoryMybatisMapper categoryMybatisMapper;
+    @Autowired
+    GoodMapper goodMapper;
+    @Autowired
+    GoodMybatisMapper copyProperties;
     private Integer length = 24;
 
-    public  List<CategoryDto> getCategory() {
+    public List<CategoryDto> getCategory() {
         List<CategoryDto> categoryDtos = categoryMybatisMapper.findByParentId(0L, "/");
         for (CategoryDto categoryDto : categoryDtos) {
             List<CategoryDto> categoryChildes = getCategory(categoryDto.getCid());
@@ -96,4 +105,8 @@ public class CategoryService {
         return map;
     }
 
+    public List<GoodDto> getGoodByCId(Long cid, Long page, Integer limit) {
+        Long index = (page - 1) * limit;
+        return copyProperties.findByCid(cid, index, limit);
+    }
 }
