@@ -19,10 +19,10 @@ public class Good {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String cid;
+    private Long cid;
     private String price;
     /**
-     * 上下架
+     * 上下架 0-下架 1-上架
      **/
     private String flag;
     private Long imgId;

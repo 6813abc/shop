@@ -1,11 +1,14 @@
 package com.ddw.shop.controller;
 
+import com.ddw.shop.dto.CategoryDto;
 import com.ddw.shop.entity.Category;
+import com.ddw.shop.entity.Good;
 import com.ddw.shop.exception.BaseResult;
 import com.ddw.shop.exception.ResultEnum;
 import com.ddw.shop.exception.ResultUtil;
 import com.ddw.shop.mapper.CategoryMapper;
 import com.ddw.shop.mapper.CategoryMybatisMapper;
+import com.ddw.shop.mapper.GoodMapper;
 import com.ddw.shop.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,9 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.util.resources.CalendarData;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author ddw
@@ -33,11 +38,13 @@ public class CategoryController {
     CategoryMybatisMapper categoryMybatisMapper;
     @Autowired
     CategoryMapper categoryMapper;
+    @Autowired
+    GoodMapper goodMapper;
 
     @GetMapping(value = "/getCategory")
     @ApiOperation("查询类目")
     public BaseResult getCategory() {
-        return categoryService.getCategory();
+        return ResultUtil.success(ResultEnum.OK, categoryService.getCategory());
     }
 
     @GetMapping(value = "/insertCategory")
@@ -65,4 +72,26 @@ public class CategoryController {
         return ResultUtil.success(ResultEnum.OK);
     }
 
+    @GetMapping(value = "/insertGoods")
+    public BaseResult insertGoods() {
+        int num = 10;
+        Random random = new Random(1000);
+        List<CategoryDto> categoryDtos = categoryService.getCategory();
+        for (CategoryDto categoryDto : categoryDtos) {
+            List<CategoryDto> categoryDtos1 = categoryDto.getCategoryDtos();
+            for (CategoryDto categoryDto1 : categoryDtos1) {
+                for (int i = 0; i < num; i++) {
+                    Good good = new Good();
+                    good.setFlag("1");
+                    good.setName(categoryDto1.getName() + i);
+                    good.setCid(categoryDto1.getCid());
+                    good.setImgId(4L);
+                    good.setPrice(random.nextInt(1000) + "");
+                    System.out.println("新增商品:" + good);
+                    goodMapper.save(good);
+                }
+            }
+        }
+        return ResultUtil.success(ResultEnum.OK);
+    }
 }

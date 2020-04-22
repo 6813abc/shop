@@ -31,14 +31,13 @@ public class CategoryService {
     CategoryMybatisMapper categoryMybatisMapper;
     private Integer length = 24;
 
-    public BaseResult getCategory() {
+    public  List<CategoryDto> getCategory() {
         List<CategoryDto> categoryDtos = categoryMybatisMapper.findByParentId(0L, "/");
-        categoryDtos = categoryDtos.size() > length ? categoryDtos.subList(0, length) : categoryDtos;
         for (CategoryDto categoryDto : categoryDtos) {
             List<CategoryDto> categoryChildes = getCategory(categoryDto.getCid());
             categoryDto.setCategoryDtos(categoryChildes);
         }
-        return ResultUtil.success(ResultEnum.OK, categoryDtos);
+        return categoryDtos;
     }
 
     public List<CategoryDto> getCategory(Long id) {
@@ -74,7 +73,7 @@ public class CategoryService {
         map.put("生鲜", new String[]{"荔枝", "水果", "百香果", "芒果", "小龙虾", "樱桃", "榴莲", "杨梅", "牛排", "柠檬", "海参", "水蜜桃", "咸鸭蛋", "李子", "桃子", "龙虾", "苹果", "黄桃", "火龙果", "菠萝蜜"});
         map.put("零食", new String[]{"零食大礼包", "牛肉干", "面包", "辣条", "红枣", "核桃", "饼干", "巧克力", "葡萄干", "芒果干", "绿豆糕", "薯片", "锅巴", "海苔", "月饼", "蛋黄酥", "猪肉脯", "花生", "瓜子", "棒棒糖"});
 
-        map.put("眼镜", new String[]{"眼镜架", "3D眼睛", "司机镜", "防辐射眼镜", "老花镜", "儿童镜", "色盲眼镜", "无框眼镜", "眼镜片", "雷朋", "复古眼镜", "超轻眼镜", "滑雪镜", "超耐磨", "护目镜", "眼镜配件"});
+        map.put("眼镜", new String[]{"眼镜架", "3D眼镜", "司机镜", "防辐射眼镜", "老花镜", "儿童镜", "色盲眼镜", "无框眼镜", "眼镜片", "雷朋", "复古眼镜", "超轻眼镜", "滑雪镜", "超耐磨", "护目镜", "眼镜配件"});
         map.put("手表", new String[]{"运动表", "卡西欧", "国表", "时尚表", "女表", "儿童表", "学生表", "浪琴", "瑞士表", "表带", "休闲", "复古手表", "中性手表", "情侣表", "陶瓷表", "怀表", "钢带表"});
         map.put("珠宝", new String[]{"钻戒", "铂金", "黄金首饰", "高端定制", "彩色宝石", "珍珠", "钻石", "翡翠玉石", "一元起拍", "设计师", "珠宝首饰", "金条", "情侣对戒", "琥珀原石", "裸石", "金镶玉"});
 
