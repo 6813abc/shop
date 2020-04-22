@@ -49,6 +49,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/insertCategory")
+    @ApiOperation("用来插入数据的，别触发")
     public BaseResult insertCategory() {
         Map<String, String[]> map = categoryService.getMap();
         for (String s : map.keySet()) {
@@ -74,6 +75,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/insertGoods")
+    @ApiOperation("用来插入数据的，别触发")
     public BaseResult insertGoods() {
         int max = 30;
         int min = 10;
