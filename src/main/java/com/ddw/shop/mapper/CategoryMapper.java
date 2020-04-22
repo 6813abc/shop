@@ -17,4 +17,6 @@ public interface CategoryMapper extends JpaRepository<Category, Long> {
     List<Category> findByParentIdAndNameContaining(Long parentId, String name);
 
     List<Category> findByParentId(Long parentId);
+
+    List<Category> findByName(String name);
 }

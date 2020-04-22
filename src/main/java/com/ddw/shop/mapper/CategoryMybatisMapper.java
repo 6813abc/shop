@@ -23,7 +23,14 @@ public interface CategoryMybatisMapper {
     @Select("select c.cid,c.name,c.parent_id from category c  where parent_id = #{parentId} " +
             "and name not like #{name}")
     @Results({
-            @Result(column = "cid", property = "cid"),
+            @Result(column = "parent_id", property = "parentId"),
     })
-    List<CategoryDto> findByParentId(Long parentId,String name);
+    List<CategoryDto> findByParentId(Long parentId, String name);
+
+    @Select("select c.cid,c.name,c.parent_id from category c  where parent_id = #{parentId} " +
+            "and name like #{name} limit 1")
+    @Results({
+            @Result(column = "parent_id", property = "parentId"),
+    })
+    CategoryDto findByName(Long parentId, String name);
 }

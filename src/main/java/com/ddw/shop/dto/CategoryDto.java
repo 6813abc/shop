@@ -12,5 +12,6 @@ import java.util.List;
 public class CategoryDto {
     private Long cid;
     private String name;
+    private Long parentId;
     List<CategoryDto> categoryDtos;
 }

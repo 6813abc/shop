@@ -9,15 +9,21 @@ import javax.persistence.Id;
 
 /**
  * @author ddw
- * @date 2020/3/18 11:32
+ * @date 2020/4/9 17:39
  **/
 @Data
 @Entity
-public class Category {
+public class Good {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cid;
+    private Long id;
     private String name;
-    private Long parentId;
+    private String cid;
+    private String price;
+    /**
+     * 上下架
+     **/
+    private String flag;
+    private Long imgId;
 }
