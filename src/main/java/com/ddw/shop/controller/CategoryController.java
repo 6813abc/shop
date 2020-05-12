@@ -48,6 +48,13 @@ public class CategoryController {
         return ResultUtil.success(ResultEnum.OK, categoryService.getCategory());
     }
 
+    @GetMapping(value = "/getGoodByCId")
+    @ApiOperation("查询商品")
+    public BaseResult getGoodByCId(Long cid, Long page, Integer limit) {
+        return ResultUtil.success(ResultEnum.OK, categoryService.getGoodByCId(cid, page, limit));
+    }
+
+
     @GetMapping(value = "/insertCategory")
     @ApiOperation("用来插入数据的，别触发")
     public BaseResult insertCategory() {

@@ -23,7 +23,7 @@ import java.util.List;
 public interface GoodMybatisMapper {
 
     /**
-     * 功能描述:
+     * 功能描述:查询商品
      *
      * @param cid
      * @param index

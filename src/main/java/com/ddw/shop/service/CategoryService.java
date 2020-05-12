@@ -37,7 +37,7 @@ public class CategoryService {
     @Autowired
     GoodMapper goodMapper;
     @Autowired
-    GoodMybatisMapper copyProperties;
+    GoodMybatisMapper goodMybatisMapper;
     private Integer length = 24;
 
     public List<CategoryDto> getCategory() {
@@ -107,6 +107,6 @@ public class CategoryService {
 
     public List<GoodDto> getGoodByCId(Long cid, Long page, Integer limit) {
         Long index = (page - 1) * limit;
-        return copyProperties.findByCid(cid, index, limit);
+        return goodMybatisMapper.findByCid(cid, index, limit);
     }
 }
