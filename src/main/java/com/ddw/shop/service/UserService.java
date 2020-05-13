@@ -3,11 +3,13 @@ package com.ddw.shop.service;
 import com.ddw.shop.config.JwtToken;
 import com.ddw.shop.dto.UserAdd;
 import com.ddw.shop.entity.File;
+import com.ddw.shop.entity.Order;
 import com.ddw.shop.entity.User;
 import com.ddw.shop.exception.BaseResult;
 import com.ddw.shop.exception.ResultEnum;
 import com.ddw.shop.exception.ResultUtil;
 import com.ddw.shop.mapper.FileMapper;
+import com.ddw.shop.mapper.OrderMapper;
 import com.ddw.shop.mapper.UserMapper;
 import com.ddw.shop.util.JedisUtil;
 import com.ddw.shop.util.ValidateCodeUtil;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,6 +45,8 @@ public class UserService {
     private JwtToken jwtToken;
     @Autowired
     private ValidateCodeUtil validateCodeUtil;
+    @Autowired
+    private OrderMapper orderMapper;
 
     public BaseResult addUser(UserAdd userAdd) {
         File file = new File();
@@ -78,11 +83,15 @@ public class UserService {
         String token = jwtToken.generateToken(phone);
         Map<String, String> map = new HashMap<>(4);
         map.put("token", token);
-        if (file.isPresent()) {
-            map.put("code", file.get().getCode());
-            map.put("name", user.getName());
-            map.put("phone", user.getPhone());
+        map.put("name", user.getName());
+        map.put("phone", user.getPhone());
+        file.ifPresent(value -> map.put("code", value.getCode()));
+        Double money = 0d;
+        List<Order> orderList = orderMapper.findByPhone(phone);
+        for (Order order : orderList) {
+            money += order.getMoney();
         }
+        map.put("money", money.toString());
         return ResultUtil.success(ResultEnum.OK, map);
     }
 
