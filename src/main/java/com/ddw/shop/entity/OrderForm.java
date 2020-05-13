@@ -13,7 +13,7 @@ import javax.persistence.Id;
  **/
 @Data
 @Entity
-public class Order {
+public class OrderForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

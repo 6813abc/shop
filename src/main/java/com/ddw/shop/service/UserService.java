@@ -3,7 +3,7 @@ package com.ddw.shop.service;
 import com.ddw.shop.config.JwtToken;
 import com.ddw.shop.dto.UserAdd;
 import com.ddw.shop.entity.File;
-import com.ddw.shop.entity.Order;
+import com.ddw.shop.entity.OrderForm;
 import com.ddw.shop.entity.User;
 import com.ddw.shop.exception.BaseResult;
 import com.ddw.shop.exception.ResultEnum;
@@ -87,8 +87,8 @@ public class UserService {
         map.put("phone", user.getPhone());
         file.ifPresent(value -> map.put("code", value.getCode()));
         Double money = 0d;
-        List<Order> orderList = orderMapper.findByPhone(phone);
-        for (Order order : orderList) {
+        List<OrderForm> orderList = orderMapper.findByPhone(phone);
+        for (OrderForm order : orderList) {
             money += order.getMoney();
         }
         map.put("money", money.toString());
