@@ -51,15 +51,10 @@ public class CategoryService {
 
     public List<CategoryDto> getCategory(Long id) {
         List<CategoryDto> categoryChildes = categoryMybatisMapper.findByParentId(id, "/");
-        //categoryChildes = categoryChildes.size() > length / 3 ? categoryChildes.subList(0, length / 3) : categoryChildes;
         if (categoryChildes.size() == 0) {
             //返回空list，结束递归，下次递归就不会进入for循环
             return new ArrayList<>();
         }
-        //暂时就查询一层，不继续递归
-        /*for (CategoryDto categoryDto : categoryChildes) {
-            categoryDto.setCategoryDtos(getCategory(categoryDto.getCid()));
-        }*/
         return categoryChildes;
     }
 
